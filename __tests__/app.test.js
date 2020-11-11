@@ -35,24 +35,7 @@ describe('app routes', () => {
 
       const expectation = [
         
-          {
-              "id": 1,
-              "todo": "wash the dishes",
-              "completed": false,
-              "owner_id": 1
-          },
-          {
-              "id": 2,
-              "todo": "clean bathroom",
-              "completed": false,
-              "owner_id": 1
-          },
-          {
-              "id": 3,
-              "todo": "take out trash",
-              "completed": false,
-              "owner_id": 1
-          },
+    
           {
               "id": 4,
               "todo": "wash the dishes",
@@ -100,18 +83,21 @@ describe('app routes', () => {
   });
 
 
-    test.only('updates todo boolean to true', async() => {
+    test('updates todo boolean to true', async() => {
 
       const expectation =
       [{
+
           todo: 'wash the dishes',
-          completed: false
+          completed: true,
+          id: 4,
+          owner_id: 2
       }];
 
       const data = await fakeRequest(app)
-       .put('/api/todos/3')
+       .put('/api/todo/4')
        .set('Authorization', token)
-       .send(expectation)
+       .send(expectation[1])
        .expect(200);
       
        expect(data.body).toEqual(expectation);
